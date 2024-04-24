@@ -22,7 +22,7 @@ class Queue {
   }
   pop() {
     if (this.length === 0) {
-      throw new Error("Cannot pop an empty queue");
+      throw new Error('Cannot pop an empty queue');
     } else if (this.length === 1) {
       this.head = null;
       this.tail = null;
@@ -33,13 +33,13 @@ class Queue {
   }
   front() {
     if (this.length === 0) {
-      throw new Error("This queue is empty");
+      throw new Error('This queue is empty');
     }
     return this.head.val;
   }
   back() {
     if (this.length === 0) {
-      throw new Error("This queue is empty");
+      throw new Error('This queue is empty');
     }
     return this.tail.val;
   }

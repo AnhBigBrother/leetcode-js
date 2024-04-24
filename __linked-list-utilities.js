@@ -3,7 +3,7 @@ function ListNode(val, next) {
   this.next = next === undefined ? null : next;
 }
 
-const buildList = (arr) => {
+const buildList = arr => {
   if (arr.length === 0) {
     return null;
   }
@@ -16,7 +16,7 @@ const buildList = (arr) => {
   return head;
 };
 
-const toArr = (head) => {
+const toArr = head => {
   let p = new ListNode(0, head);
   let arr = [];
   while (p.next !== null) {
