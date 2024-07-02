@@ -1,57 +1,55 @@
-function ListNode(val, next) {
-  this.val = val === undefined ? 0 : val;
-  this.next = next === undefined ? null : next;
-}
-
-class Queue {
-  constructor() {
-    this.head = null;
-    this.tail = null;
-    this.length = 0;
-  }
-  push(val) {
-    if (this.length === 0) {
-      const x = new ListNode(val);
-      this.head = x;
-      this.tail = x;
-    } else {
-      this.tail.next = new ListNode(val);
-      this.tail = this.tail.next;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var QueueNode = /** @class */ (function () {
+    function QueueNode(val, next) {
+        this.val = val;
+        this.next = next ? next : null;
     }
-    this.length++;
-  }
-  pop() {
-    if (this.length === 0) {
-      throw new Error('Cannot pop an empty queue');
-    } else if (this.length === 1) {
-      this.head = null;
-      this.tail = null;
-    } else {
-      this.head = this.head.next;
+    return QueueNode;
+}());
+var Queue = /** @class */ (function () {
+    function Queue() {
+        var _this = this;
+        this.push = function (x) {
+            if (_this.head === null) {
+                _this.head = new QueueNode(x);
+                _this.p.next = _this.head;
+            }
+            else {
+                _this.p.next.next = new QueueNode(x);
+                _this.p = _this.p.next;
+            }
+            _this.length++;
+        };
+        this.front = function () {
+            if (_this.head === null)
+                return null;
+            return _this.head.val;
+        };
+        this.pop = function () {
+            if (_this.length === 1) {
+                _this.head = null;
+                _this.p.next = null;
+            }
+            else {
+                _this.head = _this.head.next;
+            }
+            _this.length--;
+        };
+        this.toArray = function () {
+            var k = new QueueNode(-1);
+            k.next = _this.head;
+            var arr = [];
+            while (k.next !== null) {
+                arr.push(k.next.val);
+                k = k.next;
+            }
+            return arr;
+        };
+        this.head = null;
+        this.p = new QueueNode(-1);
+        this.length = 0;
     }
-    this.length--;
-  }
-  front() {
-    if (this.length === 0) {
-      throw new Error('This queue is empty');
-    }
-    return this.head.val;
-  }
-  back() {
-    if (this.length === 0) {
-      throw new Error('This queue is empty');
-    }
-    return this.tail.val;
-  }
-  toArray() {
-    const ans = [];
-    let p = new ListNode(null, this.head);
-    while (p.next !== null) {
-      ans.push(p.next.val);
-      p = p.next;
-    }
-    return ans;
-  }
-}
-
-module.exports = Queue;
+    return Queue;
+}());
+exports.default = Queue;

@@ -1,65 +1,53 @@
-class ListNode {
+class QueueNode {
   val: number;
-  next: ListNode | null;
-  constructor(val: number | undefined, next: ListNode | undefined) {
-    this.val = val === undefined ? 0 : val;
-    this.next = next === undefined ? null : next;
+  next: QueueNode | null;
+  constructor(val: number, next?: QueueNode) {
+    this.val = val;
+    this.next = next ? next : null;
   }
 }
-
 class Queue {
-  head: ListNode | null = new ListNode(undefined, undefined);
-  tail: ListNode | null = new ListNode(undefined, undefined);
+  head: QueueNode | null;
+  p: QueueNode;
   length: number;
   constructor() {
     this.head = null;
-    this.tail = null;
+    this.p = new QueueNode(-1);
     this.length = 0;
   }
-  push(val: number) {
-    if (this.length === 0) {
-      const x = new ListNode(val, undefined);
-      this.head = x;
-      this.tail = x;
+  push = (x: number) => {
+    if (this.head === null) {
+      this.head = new QueueNode(x);
+      this.p.next = this.head;
     } else {
-      this.tail!.next = new ListNode(val, undefined);
-      this.tail = this.tail!.next;
+      this.p.next!.next = new QueueNode(x);
+      this.p = this.p.next!;
     }
     this.length++;
-  }
-  pop() {
-    if (this.length === 0) {
-      throw new Error('Cannot pop an empty queue');
-    } else if (this.length === 1) {
+  };
+  front = () => {
+    if (this.head === null) return null;
+    return this.head.val;
+  };
+  pop = () => {
+    if (this.length === 1) {
       this.head = null;
-      this.tail = null;
+      this.p.next = null;
     } else {
       this.head = this.head!.next;
     }
     this.length--;
-  }
-  front() {
-    if (this.length === 0) {
-      throw new Error('This queue is empty');
+  };
+  toArray = () => {
+    let k = new QueueNode(-1);
+    k.next = this.head;
+    const arr: number[] = [];
+    while (k.next !== null) {
+      arr.push(k.next.val);
+      k = k.next;
     }
-    return this.head!.val;
-  }
-  back() {
-    if (this.length === 0) {
-      throw new Error('This queue is empty');
-    }
-    return this.tail!.val;
-  }
-  toArray() {
-    if (this.length === 0) return [];
-    const ans = [];
-    let p = new ListNode(undefined, this.head!);
-    while (p.next !== null) {
-      ans.push(p.next.val);
-      p = p.next;
-    }
-    return ans;
-  }
+    return arr;
+  };
 }
 
 export default Queue;

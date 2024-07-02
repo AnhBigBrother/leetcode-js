@@ -33,16 +33,7 @@ n == quality.length == wage.length
 1 <= quality[i], wage[i] <= 104
 */
 
-class HeapNode {
-  val: number;
-  left: HeapNode | null;
-  right: HeapNode | null;
-  constructor(val?: number, left?: HeapNode | null, right?: HeapNode | null) {
-    this.val = val ? val : 0;
-    this.left = left ? left : null;
-    this.right = right ? right : null;
-  }
-}
+import { HeapNode } from './__PriorityQueue';
 
 class CustomPriorityQueue {
   private head: HeapNode | null;

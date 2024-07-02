@@ -45,25 +45,27 @@ class PriorityQueue {
       }
     }
   };
-  push = (val: number) => {
-    if (this.mid === null) {
-      this.mid = new HeapNode(val);
-      this.head = this.mid;
-      this.tail = this.mid;
-    } else if (val <= this.head!.val) {
-      const x = new HeapNode(val);
-      x.right = this.head;
-      this.head!.left = x;
-      this.head = x;
-    } else if (val >= this.tail!.val) {
-      const x = new HeapNode(val);
-      this.tail!.right = x;
-      x.left = this.tail;
-      this.tail = x;
-    } else {
-      this.insert(this.mid, val);
+  push = (...args: number[]) => {
+    for (let val of args) {
+      if (this.mid === null) {
+        this.mid = new HeapNode(val);
+        this.head = this.mid;
+        this.tail = this.mid;
+      } else if (val <= this.head!.val) {
+        const x = new HeapNode(val);
+        x.right = this.head;
+        this.head!.left = x;
+        this.head = x;
+      } else if (val >= this.tail!.val) {
+        const x = new HeapNode(val);
+        this.tail!.right = x;
+        x.left = this.tail;
+        this.tail = x;
+      } else {
+        this.insert(this.mid, val);
+      }
+      this.size++;
     }
-    this.size++;
   };
   toArray = (): number[] => {
     let p = new HeapNode();
@@ -86,6 +88,7 @@ class PriorityQueue {
     }
     const x = this.tail!.left;
     x!.right = null;
+    this.tail = null;
     this.tail = x;
     this.size--;
   };
@@ -103,3 +106,7 @@ class PriorityQueue {
 }
 
 export default PriorityQueue;
+export { HeapNode };
+
+const myPQueue = new PriorityQueue();
+console.log('myPQueue:', myPQueue.toArray());
