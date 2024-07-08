@@ -1,51 +1,22 @@
-class SingleNode {
-  val: number;
-  next: SingleNode | null;
-  constructor(val: number, next?: SingleNode) {
-    this.val = val;
-    this.next = next ? next : null;
-  }
-}
-class SingleQueue {
-  head: SingleNode | null;
-  p: SingleNode;
-  length: number;
-  constructor() {
-    this.head = null;
-    this.p = new SingleNode(-1);
-    this.length = 0;
-  }
-  push = (x: number) => {
-    if (this.head === null) {
-      this.head = new SingleNode(x);
-      this.p.next = this.head;
-    } else {
-      this.p.next!.next = new SingleNode(x);
-      this.p = this.p.next!;
-    }
-    this.length++;
-  };
-  front = () => {
-    if (this.head === null) return null;
-    return this.head.val;
-  };
-  pop = () => {
-    if (this.length === 1) {
-      this.head = null;
-      this.p.next = null;
-    } else {
-      this.head = this.head!.next;
-    }
-    this.length--;
-  };
-  toArray = () => {
-    let k = new SingleNode(-1);
-    k.next = this.head;
-    const arr: number[] = [];
-    while (k.next !== null) {
-      arr.push(k.next.val);
-      k = k.next;
-    }
-    return arr;
-  };
-}
+function nodesBetweenCriticalPoints(head: ListNode | null): number[] {
+//   let p = new ListNode();
+//   p.next = head;
+//   let pre = p.next!.val;
+//   p = p.next;
+//   const arr = [];
+//   let idx = 1;
+//   while (p.next !== null) {
+//     const val = p.next.val;
+//     if (p.next.next !== null) {
+//       if (val > p.next.next.val && val > pre) {
+//         arr.push(idx);
+//       } else if (val < pre && val < p.next.next.val) {
+//         arr.push(idx);
+//       }
+//     }
+//     pre = val;
+//     idx++;
+//   }
+
+//   return arr;
+// }
