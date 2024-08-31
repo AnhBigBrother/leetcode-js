@@ -50,38 +50,40 @@ bloomDay.length == n
 1 <= k <= n
 */
 
+export {};
+
 function minDays(bloomDay: number[], m: number, k: number): number {
-  if (bloomDay.length / k < m) return -1;
+	if (bloomDay.length / k < m) return -1;
 
-  const possible = (day: number) => {
-    let currLen = 0,
-      bouquet = 0;
-    for (let i = 0; i < bloomDay.length; i++) {
-      if (bloomDay[i] <= day) {
-        currLen++;
-        if (currLen === k) {
-          bouquet++;
-          currLen = 0;
-        }
-      } else currLen = 0;
-      if (bouquet >= m) return true;
-    }
-    return !!(bouquet >= m);
-  };
+	const possible = (day: number) => {
+		let currLen = 0,
+			bouquet = 0;
+		for (let i = 0; i < bloomDay.length; i++) {
+			if (bloomDay[i] <= day) {
+				currLen++;
+				if (currLen === k) {
+					bouquet++;
+					currLen = 0;
+				}
+			} else currLen = 0;
+			if (bouquet >= m) return true;
+		}
+		return !!(bouquet >= m);
+	};
 
-  let l = Math.min(...bloomDay);
-  let r = Math.max(...bloomDay);
+	let l = Math.min(...bloomDay);
+	let r = Math.max(...bloomDay);
 
-  while (l < r) {
-    const m = Math.floor(l + (r - l) / 2);
-    if (possible(m)) {
-      r = m;
-    } else {
-      l = m + 1;
-    }
-  }
+	while (l < r) {
+		const m = Math.floor(l + (r - l) / 2);
+		if (possible(m)) {
+			r = m;
+		} else {
+			l = m + 1;
+		}
+	}
 
-  return l;
+	return l;
 }
 
 console.log(minDays([7, 7, 7, 7, 12, 7, 7], 2, 3));
