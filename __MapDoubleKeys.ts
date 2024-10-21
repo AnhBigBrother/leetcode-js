@@ -1,9 +1,9 @@
-export class MapDoubleKeys {
+export class MapDoubleKeys<T> {
 	private map;
 	constructor() {
-		this.map = new Map<string, number>();
+		this.map = new Map<string, T>();
 	}
-	public set = (x: number, y: number, val: number) => {
+	public set = (x: number, y: number, val: T) => {
 		let str = x < y ? x + "-" + y : y + "-" + x;
 		this.map.set(str, val);
 	};
